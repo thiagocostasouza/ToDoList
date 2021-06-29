@@ -2,7 +2,6 @@ package com.invillia.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -12,14 +11,15 @@ import com.invillia.todolist.databinding.ActivityAddTaskBinding
 import com.invillia.todolist.datasource.TaskDataSource
 import com.invillia.todolist.extensions.format
 import com.invillia.todolist.extensions.text
-import com.invillia.todolist.model.Task
+import com.invillia.todolist.model.TaskEntity
 import com.invillia.todolist.ui.viewmodels.AddTaskActivityViewModel
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
-    private lateinit var viewModel: AddTaskActivityViewModel
+    private  val viewModel by lazy { val provedor =
+        ViewModelProvider.NewInstanceFactory().create(AddTaskActivityViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,7 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         insertListeners()
-        viewModel =
-            ViewModelProvider.NewInstanceFactory().create(AddTaskActivityViewModel::class.java)
+
 
 
     }
@@ -73,7 +72,7 @@ class AddTaskActivity : AppCompatActivity() {
             finish()
         }
         binding.buttonAdd.setOnClickListener {
-            val task = Task(
+            val task = TaskEntity(
                 title = binding.inputLayoutTitle.text,
                 description = binding.inputLayoutDescription.text,
                 date = binding.inputLayoutData.text,

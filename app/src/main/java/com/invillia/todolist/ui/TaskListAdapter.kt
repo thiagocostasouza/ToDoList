@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.invillia.todolist.R
 import com.invillia.todolist.databinding.ItemTaskBinding
-import com.invillia.todolist.model.Task
+import com.invillia.todolist.model.TaskEntity
 
-class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCallBack()) {
+class TaskListAdapter : ListAdapter<TaskEntity, TaskListAdapter.TaskViewHolder>(DiffCallBack()) {
 
-    var listenerEdit : (Task) -> Unit = {}
-    var listenerDelete : (Task) -> Unit = {}
+    var listenerEdit : (TaskEntity) -> Unit = {}
+    var listenerDelete : (TaskEntity) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,7 +28,7 @@ class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCa
    inner class TaskViewHolder(
         private val binding: ItemTaskBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Task) {
+        fun bind(item: TaskEntity) {
             binding.tvTitle.text = item.title
             binding.tvDate.text = "${item.date} ${item.hour}"
             binding.ivMore.setOnClickListener {
@@ -36,7 +36,7 @@ class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCa
             }
         }
 
-        private fun showPopup(item: Task) {
+        private fun showPopup(item: TaskEntity) {
             val ivMore = binding.ivMore
             val popupMenu = PopupMenu(ivMore.context, ivMore)
             popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
@@ -52,7 +52,7 @@ class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCa
     }
 }
 
-class DiffCallBack : DiffUtil.ItemCallback<Task>() {
-    override fun areItemsTheSame(oldItem: Task, newItem: Task) = oldItem == newItem
-    override fun areContentsTheSame(oldItem: Task, newItem: Task) = oldItem.id == newItem.id
+class DiffCallBack : DiffUtil.ItemCallback<TaskEntity>() {
+    override fun areItemsTheSame(oldItem: TaskEntity, newItem: TaskEntity) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: TaskEntity, newItem: TaskEntity) = oldItem.id == newItem.id
 }

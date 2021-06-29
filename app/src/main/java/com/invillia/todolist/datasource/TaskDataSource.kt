@@ -1,13 +1,13 @@
 package com.invillia.todolist.datasource
 
-import com.invillia.todolist.model.Task
+import com.invillia.todolist.model.TaskEntity
 
 object TaskDataSource {
-    private val list = arrayListOf<Task>()
+    private val list = arrayListOf<TaskEntity>()
 
     fun getList() = list.toList()
 
-    fun insertTask(task: Task) {
+    fun insertTask(task: TaskEntity) {
         if (task.id == 0){
             list.add(task.copy(id = list.size + 1))
         }else{
@@ -17,7 +17,7 @@ object TaskDataSource {
     }
     fun findById(taskId: Int) = list.find { it.id == taskId }
 
-    fun deleteTask(task: Task) {
+    fun deleteTask(task: TaskEntity) {
         list.remove(task)
     }
 

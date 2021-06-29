@@ -3,10 +3,9 @@ package com.invillia.todolist.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
-@Entity
-data class Task(
+@Entity(tableName = "tasks")
+data class TaskEntity(
     @PrimaryKey  val id: Int = 0,
 
     @ColumnInfo(name = "title")
@@ -22,7 +21,7 @@ data class Task(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Task
+        other as TaskEntity
 
         if (id != other.id) return false
 

@@ -4,16 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.invillia.todolist.datasource.TaskDataSource
-import com.invillia.todolist.model.Task
+import com.invillia.todolist.model.TaskEntity
 
-class AddTaskActivityViewModel() : ViewModel() {
+class AddTaskActivityViewModel(
+    private val dataSource: TaskDataSource )
+    : ViewModel() {
 
 
 
 
 
-    private val _listTask = MutableLiveData<List<Task>>()
-    val listTask: LiveData<List<Task>>
+    private val _listTask = MutableLiveData<List<TaskEntity>>()
+    val listTask: LiveData<List<TaskEntity>>
         get() = _listTask
 
 
